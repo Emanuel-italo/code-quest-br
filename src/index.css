@@ -8,28 +8,28 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 215 25% 27%;
+    --background: 0 0% 12%;
+    --foreground: 0 0% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 215 25% 27%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 27%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
 
-    /* Python blue */
-    --primary: 210 70% 50%;
-    --primary-foreground: 0 0% 100%;
+    /* Bradesco red */
+    --primary: 349 92% 42%;
+    --primary-foreground: 0 0% 98%;
     
-    /* Python yellow */
-    --secondary: 48 100% 62%;
-    --secondary-foreground: 215 25% 27%;
+    /* Bradesco dark red */
+    --secondary: 349 88% 28%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 48 100% 62%;
-    --accent-foreground: 215 25% 27%;
+    --accent: 349 92% 50%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
@@ -37,20 +37,20 @@ All colors MUST be HSL.
     --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 210 70% 50%;
+    --border: 0 0% 20%;
+    --input: 0 0% 18%;
+    --ring: 349 92% 42%;
 
     --radius: 0.75rem;
     
     /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(210 70% 50%), hsl(210 70% 40%));
-    --gradient-secondary: linear-gradient(135deg, hsl(48 100% 62%), hsl(48 100% 52%));
-    --gradient-hero: linear-gradient(135deg, hsl(210 70% 50%), hsl(48 100% 62%));
+    --gradient-primary: linear-gradient(135deg, hsl(349 92% 42%), hsl(349 88% 28%));
+    --gradient-secondary: linear-gradient(135deg, hsl(349 88% 28%), hsl(349 85% 20%));
+    --gradient-hero: linear-gradient(135deg, hsl(349 92% 42%), hsl(0 0% 8%));
     
     /* Shadows */
-    --shadow-lg: 0 10px 40px -10px hsl(210 70% 50% / 0.2);
-    --shadow-glow: 0 0 30px hsl(210 70% 50% / 0.15);
+    --shadow-lg: 0 10px 40px -10px hsl(349 92% 42% / 0.3);
+    --shadow-glow: 0 0 40px hsl(349 92% 50% / 0.4);
 
     --sidebar-background: 0 0% 98%;
 
