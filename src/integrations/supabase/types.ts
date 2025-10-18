@@ -14,7 +14,105 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      certificates: {
+        Row: {
+          badges_count: number
+          certificate_html: string | null
+          completion_date: string | null
+          created_at: string | null
+          full_name: string
+          id: string
+          max_score: number
+          percentage: number
+          total_score: number
+          user_id: string
+        }
+        Insert: {
+          badges_count: number
+          certificate_html?: string | null
+          completion_date?: string | null
+          created_at?: string | null
+          full_name: string
+          id?: string
+          max_score: number
+          percentage: number
+          total_score: number
+          user_id: string
+        }
+        Update: {
+          badges_count?: number
+          certificate_html?: string | null
+          completion_date?: string | null
+          created_at?: string | null
+          full_name?: string
+          id?: string
+          max_score?: number
+          percentage?: number
+          total_score?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      game_progress: {
+        Row: {
+          completed_levels: number[] | null
+          created_at: string | null
+          current_level: number | null
+          earned_badges: Json | null
+          id: string
+          total_score: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          completed_levels?: number[] | null
+          created_at?: string | null
+          current_level?: number | null
+          earned_badges?: Json | null
+          id?: string
+          total_score?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          completed_levels?: number[] | null
+          created_at?: string | null
+          current_level?: number | null
+          earned_badges?: Json | null
+          id?: string
+          total_score?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
