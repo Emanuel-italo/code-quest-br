@@ -1,25 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Code2, Trophy, Zap, Sparkles, LogOut } from "lucide-react";
-import { User } from "@supabase/supabase-js";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+import { Code2, Trophy, Zap, Sparkles } from "lucide-react";
 
 interface GameIntroProps {
   onStart: () => void;
-  user: User | null;
 }
 
-export const GameIntro = ({ onStart, user }: GameIntroProps) => {
-  const { toast } = useToast();
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Até logo! 👋",
-      description: "Você saiu da sua conta",
-    });
-  };
+export const GameIntro = ({ onStart }: GameIntroProps) => {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-background via-card/50 to-background relative overflow-hidden">
       {/* Animated background */}
@@ -27,16 +14,6 @@ export const GameIntro = ({ onStart, user }: GameIntroProps) => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,hsl(var(--accent)/0.1),transparent_50%)]" />
       
       <Card className="max-w-4xl w-full p-8 md:p-12 shadow-2xl relative border-primary/20">
-        {/* User info & logout */}
-        {user && (
-          <div className="absolute top-4 right-4 flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Olá, {user.email?.split('@')[0]}</span>
-            <Button variant="ghost" size="sm" onClick={handleLogout}>
-              <LogOut className="w-4 h-4" />
-            </Button>
-          </div>
-        )}
-        
         <div className="text-center space-y-6">
           <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary via-accent to-secondary mb-4 shadow-glow animate-pulse">
             <Code2 className="w-12 h-12 text-primary-foreground" />

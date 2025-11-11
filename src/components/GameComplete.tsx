@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Trophy, Share2, Star, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { CertificateGenerator } from "./CertificateGenerator";
 
 interface GameCompleteProps {
@@ -16,55 +15,14 @@ interface GameCompleteProps {
 export const GameComplete = ({ totalScore, maxScore, earnedBadges, onRestart }: GameCompleteProps) => {
   const { toast } = useToast();
   const [showCertificate, setShowCertificate] = useState(false);
-  const [userProfile, setUserProfile] = useState<{ full_name: string; email: string } | null>(null);
+  const [userName] = useState("Participante");
   const [certificateId, setCertificateId] = useState("");
   const percentage = Math.round((totalScore / maxScore) * 100);
 
   useEffect(() => {
-    loadUserProfile();
-    generateCertificate();
+    const certId = `PQ-${Date.now()}-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
+    setCertificateId(certId);
   }, []);
-
-  const loadUserProfile = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("full_name, email")
-        .eq("id", user.id)
-        .single();
-
-      if (error) throw error;
-      setUserProfile(data);
-    } catch (error) {
-      console.error("Error loading profile:", error);
-    }
-  };
-
-  const generateCertificate = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user || !userProfile) return;
-
-      const certId = `PQ-${Date.now()}-${user.id.substring(0, 8).toUpperCase()}`;
-      setCertificateId(certId);
-
-      const { error } = await supabase.from("certificates").insert({
-        user_id: user.id,
-        full_name: userProfile.full_name || userProfile.email || "Codificador Anônimo",
-        total_score: totalScore,
-        max_score: maxScore,
-        percentage,
-        badges_count: earnedBadges.length,
-      });
-
-      if (error) console.error("Error saving certificate:", error);
-    } catch (error) {
-      console.error("Error generating certificate:", error);
-    }
-  };
   
   const certificateText = `🏆 CERTIFICADO QUÂNTICO 🏆
 
@@ -119,7 +77,7 @@ Se você quer começar em programação de forma divertida e memorável, essa é
     setShowCertificate(true);
   };
 
-  if (showCertificate && userProfile) {
+  if (showCertificate) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-background via-card/50 to-background">
         <div className="max-w-5xl w-full">
@@ -131,7 +89,7 @@ Se você quer começar em programação de forma divertida e memorável, essa é
             ← Voltar
           </Button>
           <CertificateGenerator
-            fullName={userProfile.full_name || userProfile.email || "Codificador Anônimo"}
+            fullName={userName}
             completionDate={new Date().toLocaleDateString("pt-BR")}
             totalScore={totalScore}
             maxScore={maxScore}

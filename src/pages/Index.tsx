@@ -1,21 +1,15 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
-import { Auth } from "@/components/Auth";
 import { GameIntro } from "@/components/GameIntro";
 import { GamePlay } from "@/components/GamePlay";
 import { LevelComplete } from "@/components/LevelComplete";
 import { GameComplete } from "@/components/GameComplete";
 import { gameLevels, badges } from "@/data/gameData";
-import { useToast } from "@/hooks/use-toast";
 
-type GameState = "auth" | "intro" | "playing" | "levelComplete" | "complete";
+type GameState = "intro" | "playing" | "levelComplete" | "complete";
 
 const Index = () => {
-  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [gameState, setGameState] = useState<GameState>("auth");
-  const { toast } = useToast();
+  const [gameState, setGameState] = useState<GameState>("intro");
   const [currentLevelIndex, setCurrentLevelIndex] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
   const [levelScore, setLevelScore] = useState(0);
@@ -25,72 +19,35 @@ const Index = () => {
   const totalMaxScore = maxScorePerLevel * gameLevels.length;
 
   useEffect(() => {
-    // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        loadProgress(session.user.id);
-        setGameState("intro");
-      }
-      setLoading(false);
-    });
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        loadProgress(session.user.id);
-        setGameState("intro");
-      } else {
-        setGameState("auth");
-      }
-    });
-
-    return () => subscription.unsubscribe();
+    // Load progress from localStorage
+    loadProgress();
+    setLoading(false);
   }, []);
 
-  const loadProgress = async (userId: string) => {
+  const loadProgress = () => {
     try {
-      const { data, error } = await supabase
-        .from("game_progress")
-        .select("*")
-        .eq("user_id", userId)
-        .maybeSingle();
-
-      if (error) throw error;
-
-      if (data) {
-        setCurrentLevelIndex(data.current_level - 1);
-        setTotalScore(data.total_score);
-        setEarnedBadges(data.earned_badges as typeof badges);
+      const savedProgress = localStorage.getItem("pythonquest_progress");
+      if (savedProgress) {
+        const progress = JSON.parse(savedProgress);
+        setCurrentLevelIndex(progress.currentLevel || 0);
+        setTotalScore(progress.totalScore || 0);
+        setEarnedBadges(progress.earnedBadges || []);
       }
     } catch (error) {
       console.error("Error loading progress:", error);
     }
   };
 
-  const saveProgress = async () => {
-    if (!user) return;
-
+  const saveProgress = () => {
     try {
-      const { error } = await supabase
-        .from("game_progress")
-        .upsert({
-          user_id: user.id,
-          current_level: currentLevelIndex + 1,
-          total_score: totalScore,
-          completed_levels: Array.from({ length: currentLevelIndex + 1 }, (_, i) => i + 1),
-          earned_badges: earnedBadges,
-        });
-
-      if (error) throw error;
+      const progress = {
+        currentLevel: currentLevelIndex,
+        totalScore: totalScore,
+        earnedBadges: earnedBadges,
+      };
+      localStorage.setItem("pythonquest_progress", JSON.stringify(progress));
     } catch (error) {
       console.error("Error saving progress:", error);
-      toast({
-        title: "Erro ao salvar progresso",
-        description: "Tente novamente mais tarde",
-        variant: "destructive",
-      });
     }
   };
 
@@ -98,7 +55,7 @@ const Index = () => {
     setGameState("playing");
   };
 
-  const handleLevelComplete = async (score: number) => {
+  const handleLevelComplete = (score: number) => {
     setLevelScore(score);
     const newTotalScore = totalScore + score;
     setTotalScore(newTotalScore);
@@ -115,7 +72,7 @@ const Index = () => {
     }
     
     setGameState("levelComplete");
-    await saveProgress();
+    saveProgress();
   };
 
   const handleNextLevel = () => {
@@ -149,9 +106,7 @@ const Index = () => {
 
   return (
     <>
-      {gameState === "auth" && <Auth onSuccess={() => setGameState("intro")} />}
-      
-      {gameState === "intro" && <GameIntro onStart={handleStart} user={user} />}
+      {gameState === "intro" && <GameIntro onStart={handleStart} />}
       
       {gameState === "playing" && (
         <GamePlay
