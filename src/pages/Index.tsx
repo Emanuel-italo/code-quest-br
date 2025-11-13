@@ -3,9 +3,10 @@ import { GameIntro } from "@/components/GameIntro";
 import { GamePlay } from "@/components/GamePlay";
 import { LevelComplete } from "@/components/LevelComplete";
 import { GameComplete } from "@/components/GameComplete";
+import { UnlockIntermediate } from "@/components/UnlockIntermediate";
 import { gameLevels, badges } from "@/data/gameData";
 
-type GameState = "intro" | "playing" | "levelComplete" | "complete";
+type GameState = "intro" | "playing" | "levelComplete" | "unlockIntermediate" | "complete";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -77,11 +78,21 @@ const Index = () => {
 
   const handleNextLevel = () => {
     if (currentLevelIndex < gameLevels.length - 1) {
-      setCurrentLevelIndex(currentLevelIndex + 1);
-      setGameState("playing");
+      // Após completar nível 6 (índice 5), mostrar desbloqueio
+      if (currentLevelIndex === 5) {
+        setCurrentLevelIndex(currentLevelIndex + 1);
+        setGameState("unlockIntermediate");
+      } else {
+        setCurrentLevelIndex(currentLevelIndex + 1);
+        setGameState("playing");
+      }
     } else {
       setGameState("complete");
     }
+  };
+
+  const handleContinueAfterUnlock = () => {
+    setGameState("playing");
   };
 
   const handleRestart = () => {
@@ -126,6 +137,10 @@ const Index = () => {
           onNextLevel={handleNextLevel}
           newBadge={newBadge}
         />
+      )}
+
+      {gameState === "unlockIntermediate" && (
+        <UnlockIntermediate onContinue={handleContinueAfterUnlock} />
       )}
       
       {gameState === "complete" && (

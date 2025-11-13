@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, Share2, Copy } from "lucide-react";
+import { Download, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface CertificateProps {
@@ -27,303 +27,143 @@ export const CertificateGenerator = ({
   const { toast } = useToast();
 
   const handleDownloadPDF = () => {
-    if (certificateRef.current) {
-      window.print();
-    }
-  };
-
-  const certificateHTML = `
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificado Python Quest</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
-    
-    body {
-      margin: 0;
-      padding: 40px;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-    }
-    
-    .certificate {
-      max-width: 900px;
-      margin: 0 auto;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0f 100%);
-      border: 8px solid #CC092F;
-      border-radius: 20px;
-      padding: 60px;
-      box-shadow: 0 20px 60px rgba(204, 9, 47, 0.4);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .certificate::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(204, 9, 47, 0.1) 0%, transparent 70%);
-      animation: pulse 3s infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-    
-    .content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-    }
-    
-    .logo {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
-    
-    .title {
-      font-family: 'Playfair Display', serif;
-      font-size: 52px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #CC092F 0%, #FF4D6D 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin: 20px 0;
-    }
-    
-    .subtitle {
-      color: #f0f0f0;
-      font-size: 24px;
-      margin-bottom: 40px;
-      font-weight: 600;
-    }
-    
-    .recipient {
-      font-size: 18px;
-      color: #d0d0d0;
-      margin-bottom: 10px;
-    }
-    
-    .name {
-      font-family: 'Playfair Display', serif;
-      font-size: 42px;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 20px 0 40px 0;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-    
-    .achievement {
-      font-size: 18px;
-      line-height: 1.8;
-      color: #d0d0d0;
-      margin-bottom: 40px;
-    }
-    
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      margin: 40px 0;
-    }
-    
-    .stat {
-      background: rgba(204, 9, 47, 0.1);
-      border: 2px solid #CC092F;
-      border-radius: 12px;
-      padding: 20px;
-    }
-    
-    .stat-value {
-      font-size: 36px;
-      font-weight: 700;
-      color: #CC092F;
-    }
-    
-    .stat-label {
-      font-size: 14px;
-      color: #b0b0b0;
-      margin-top: 5px;
-    }
-    
-    .footer {
-      margin-top: 50px;
-      padding-top: 30px;
-      border-top: 2px solid rgba(204, 9, 47, 0.3);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .date, .signature {
-      color: #b0b0b0;
-      font-size: 14px;
-    }
-    
-    .verification {
-      margin-top: 30px;
-      font-size: 12px;
-      color: #808080;
-    }
-    
-    .seal {
-      position: absolute;
-      bottom: 40px;
-      right: 40px;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #CC092F 0%, #8B0623 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-      box-shadow: 0 0 30px rgba(204, 9, 47, 0.6);
-    }
-    
-    @media print {
-      body { background: white; padding: 0; }
-      .certificate { box-shadow: none; border-width: 4px; }
-    }
-  </style>
-</head>
-<body>
-  <div class="certificate">
-    <div class="content">
-      <div class="logo">🐍✨</div>
-      <h1 class="title">Certificado Quântico</h1>
-      <p class="subtitle">Python Quest - Jornada Épica</p>
-      
-      <p class="recipient">Este certificado confirma que</p>
-      <h2 class="name">${fullName}</h2>
-      
-      <p class="achievement">
-        Completou com sucesso a jornada épica e surreal pelo mundo da programação Python,
-        dominando variáveis mágicas, loops temporais e funções místicas através de 6 níveis
-        de desafios interativos que transcendem a realidade comum.
-      </p>
-      
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-value">${totalScore}</div>
-          <div class="stat-label">Pontos Conquistados</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">${percentage}%</div>
-          <div class="stat-label">Aproveitamento</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">${badgesCount}</div>
-          <div class="stat-label">Medalhas Lendárias</div>
-        </div>
-      </div>
-      
-      <div class="achievement">
-        <strong>Conceitos Dominados:</strong> Variáveis e Tipos de Dados • Operadores Básicos • 
-        Entrada e Saída • Estruturas Condicionais • Laços de Repetição • Funções
-      </div>
-      
-      <div class="footer">
-        <div class="date">
-          Emitido em: ${completionDate}
-        </div>
-        <div class="signature">
-          Python Quest Academy<br/>
-          <small>Certificação Digital</small>
-        </div>
-      </div>
-      
-      <div class="verification">
-        ID de Verificação: ${certificateId}<br/>
-        Este certificado é válido em todas as dimensões conhecidas e desconhecidas
-      </div>
-    </div>
-    
-    <div class="seal">🏆</div>
-  </div>
-</body>
-</html>
-  `;
-
-  const handleCopyHTML = () => {
-    navigator.clipboard.writeText(certificateHTML);
+    window.print();
     toast({
-      title: "HTML copiado! 📋",
-      description: "Cole em um arquivo .html e abra no navegador",
+      title: "Pronto para imprimir! 🖨️",
+      description: "Salve como PDF na janela de impressão",
     });
   };
 
-  const handleShare = () => {
-    const shareText = `🏆 Acabei de completar o Python Quest!
-
-📊 Resultado: ${percentage}% de aproveitamento
-⭐ ${totalScore} pontos conquistados
-🎖️ ${badgesCount} medalhas lendárias
-
-Domínei: Variáveis, Operadores, Condicionais, Loops e Funções em Python!
-
-#Python #Programação #Aprendizado #PythonQuest #DesenvolvimentoProfissional`;
-
-    navigator.clipboard.writeText(shareText);
+  const handleCopyHTML = () => {
+    const htmlContent = certificateRef.current?.innerHTML || "";
+    navigator.clipboard.writeText(htmlContent);
     toast({
-      title: "Texto copiado! 🎉",
-      description: "Cole no LinkedIn ou em suas redes sociais",
+      title: "HTML copiado! 📋",
+      description: "Cole onde quiser",
     });
   };
 
   return (
-    <div className="space-y-6">
-      <Card className="p-8 bg-gradient-to-br from-card to-background border-primary/30">
-        <div
-          ref={certificateRef}
-          dangerouslySetInnerHTML={{ __html: certificateHTML }}
-          className="certificate-preview"
-          style={{ transform: 'scale(0.5)', transformOrigin: 'top center' }}
-        />
-      </Card>
-
-      <div className="grid md:grid-cols-3 gap-4">
+    <div>
+      {/* Botões de ação - escondidos na impressão */}
+      <div className="print:hidden mb-6 flex gap-3 justify-center">
         <Button
           onClick={handleDownloadPDF}
-          className="gap-2 bg-gradient-to-r from-primary to-accent"
+          className="gap-2 bg-gradient-to-r from-primary via-accent to-primary"
+          size="lg"
         >
           <Download className="w-5 h-5" />
           Imprimir/Salvar PDF
         </Button>
-
         <Button
           onClick={handleCopyHTML}
           variant="outline"
           className="gap-2"
+          size="lg"
         >
           <Copy className="w-5 h-5" />
           Copiar HTML
         </Button>
-
-        <Button
-          onClick={handleShare}
-          className="gap-2 bg-gradient-to-r from-accent to-primary"
-        >
-          <Share2 className="w-5 h-5" />
-          Compartilhar
-        </Button>
       </div>
 
-      <Card className="p-4 bg-muted/30">
-        <h4 className="font-semibold mb-2 text-sm">💡 Como usar seu certificado:</h4>
-        <ul className="text-xs text-muted-foreground space-y-1">
-          <li>• <strong>Imprimir/PDF:</strong> Use Ctrl+P (Cmd+P no Mac) para salvar como PDF</li>
-          <li>• <strong>Copiar HTML:</strong> Cole em um arquivo .html e abra no navegador</li>
-          <li>• <strong>Compartilhar:</strong> Texto pronto para LinkedIn e redes sociais</li>
+      {/* Certificado - modo paisagem na impressão */}
+      <Card 
+        ref={certificateRef}
+        className="relative overflow-hidden bg-gradient-to-br from-background via-card to-background border-8 border-primary shadow-2xl print:border-primary print:shadow-none print:w-[297mm] print:h-[210mm] print:max-w-none print:m-0"
+      >
+        {/* Efeito de fundo pulsante */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.15),transparent_70%)] animate-pulse" />
+        
+        {/* Decorações de canto */}
+        <div className="absolute top-0 left-0 w-32 h-32 border-t-8 border-l-8 border-accent opacity-30" />
+        <div className="absolute top-0 right-0 w-32 h-32 border-t-8 border-r-8 border-accent opacity-30" />
+        <div className="absolute bottom-0 left-0 w-32 h-32 border-b-8 border-l-8 border-accent opacity-30" />
+        <div className="absolute bottom-0 right-0 w-32 h-32 border-b-8 border-r-8 border-accent opacity-30" />
+
+        {/* Conteúdo */}
+        <div className="relative z-10 p-16 text-center">
+          {/* Logo/Ícone */}
+          <div className="text-7xl mb-6">🏆</div>
+
+          {/* Título */}
+          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+            CERTIFICADO QUÂNTICO
+          </h1>
+
+          <p className="text-xl text-muted-foreground mb-8">
+            Python Quest - Uma Jornada Épica
+          </p>
+
+          {/* Selo de Verificação */}
+          <div className="inline-block relative mb-8">
+            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-accent via-primary to-secondary flex items-center justify-center shadow-glow animate-pulse">
+              <svg className="w-16 h-16 text-primary-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+            </div>
+            <div className="absolute -inset-2 border-4 border-accent rounded-full opacity-30" />
+            <div className="absolute -inset-4 border-2 border-accent rounded-full opacity-20" />
+          </div>
+
+          {/* Texto de Certificação */}
+          <p className="text-lg text-muted-foreground mb-4">
+            Certificamos que
+          </p>
+
+          <h2 className="text-5xl font-bold mb-8 text-foreground uppercase tracking-wide">
+            {fullName}
+          </h2>
+
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
+            Completou com sucesso todos os níveis da jornada Python Quest,
+            demonstrando domínio em variáveis, operadores, estruturas condicionais,
+            laços de repetição e funções, transcendendo as dimensões do código.
+          </p>
+
+          {/* Estatísticas */}
+          <div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto mb-8">
+            <div className="bg-primary/10 border-2 border-primary/30 rounded-lg p-6">
+              <div className="text-4xl font-bold text-primary mb-2">{totalScore}</div>
+              <div className="text-sm text-muted-foreground">Pontos de {maxScore}</div>
+            </div>
+            <div className="bg-accent/10 border-2 border-accent/30 rounded-lg p-6">
+              <div className="text-4xl font-bold text-accent mb-2">{percentage}%</div>
+              <div className="text-sm text-muted-foreground">Aproveitamento</div>
+            </div>
+            <div className="bg-success/10 border-2 border-success/30 rounded-lg p-6">
+              <div className="text-4xl font-bold text-success mb-2">{badgesCount}</div>
+              <div className="text-sm text-muted-foreground">Medalhas</div>
+            </div>
+          </div>
+
+          {/* Data e ID */}
+          <div className="flex justify-between items-end mt-12 pt-8 border-t-2 border-primary/20">
+            <div className="text-left">
+              <div className="text-sm text-muted-foreground mb-1">Data de Conclusão</div>
+              <div className="text-lg font-semibold">{completionDate}</div>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-32 h-1 bg-primary mb-2" />
+              <div className="text-xs text-muted-foreground">Assinatura Digital</div>
+            </div>
+            
+            <div className="text-right">
+              <div className="text-sm text-muted-foreground mb-1">ID de Verificação</div>
+              <div className="text-lg font-mono font-semibold">{certificateId}</div>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      {/* Instruções - escondidas na impressão */}
+      <Card className="mt-6 p-6 bg-muted/30 border-primary/20 print:hidden">
+        <h3 className="font-bold mb-3 text-lg">📜 Como usar seu certificado:</h3>
+        <ul className="text-sm text-muted-foreground space-y-2">
+          <li>✨ Clique em "Imprimir/Salvar PDF" e escolha "Salvar como PDF"</li>
+          <li>🔗 Use "Copiar HTML" para incorporar em seu site ou portfólio</li>
+          <li>🌐 Compartilhe nas redes sociais para celebrar sua conquista</li>
+          <li>🎯 Este certificado é válido e verificável pelo ID único</li>
         </ul>
       </Card>
     </div>

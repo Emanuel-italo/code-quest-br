@@ -47,15 +47,9 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
         },
       },
       borderRadius: {
@@ -80,10 +74,21 @@ export default {
             height: "0",
           },
         },
+        "confetti-fall": {
+          "0%": {
+            transform: "translateY(-100vh) rotate(0deg)",
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translateY(100vh) rotate(720deg)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "confetti-fall": "confetti-fall 3s ease-in-out forwards",
       },
     },
   },
