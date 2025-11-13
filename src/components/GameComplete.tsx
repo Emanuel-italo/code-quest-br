@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Trophy, Share2, Star, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { CertificateGenerator } from "./CertificateGenerator";
+import { Confetti } from "./Confetti";
 
 interface GameCompleteProps {
   totalScore: number;
@@ -104,6 +105,7 @@ Se você quer começar em programação de forma divertida e memorável, essa é
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-background via-card/50 to-background relative overflow-hidden">
+      <Confetti />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsl(var(--primary)/0.15),transparent_70%)]" />
       <div className="absolute top-20 left-20 text-6xl animate-pulse">✨</div>
       <div className="absolute bottom-20 right-20 text-6xl animate-pulse delay-1000">🌟</div>

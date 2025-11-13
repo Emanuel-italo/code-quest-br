@@ -239,6 +239,230 @@ export const gameLevels: Level[] = [
         hint2: "return calcula e devolve o resultado para quem chamou a função."
       }
     ]
+  },
+  {
+    id: 7,
+    title: "Listas (Arrays)",
+    description: "Domine coleções ordenadas de dados",
+    concept: "Listas são como prateleiras que podem guardar vários itens em ordem. Você pode adicionar, remover e acessar itens por sua posição!",
+    questions: [
+      {
+        id: 19,
+        question: "Como criar uma lista com os números 1, 2 e 3?",
+        options: [
+          "numeros = [1, 2, 3]",
+          "numeros = (1, 2, 3)",
+          "numeros = {1, 2, 3}",
+          "numeros = list(1, 2, 3)"
+        ],
+        correctAnswer: 0,
+        explanation: "Listas em Python são criadas usando colchetes []. Elas são ordenadas e mutáveis.",
+        hint1: "Listas usam colchetes, não parênteses ou chaves.",
+        hint2: "A sintaxe correta é: nome = [item1, item2, item3]"
+      },
+      {
+        id: 20,
+        question: "Como acessar o primeiro item da lista?",
+        code: "frutas = ['maçã', 'banana', 'laranja']\nprint(frutas[?])",
+        options: [
+          "frutas[1]",
+          "frutas[0]",
+          "frutas[first]",
+          "frutas.first()"
+        ],
+        correctAnswer: 1,
+        explanation: "Em Python, a contagem começa do zero! O primeiro item está no índice 0.",
+        hint1: "Lembre-se: Python conta a partir do zero.",
+        hint2: "O primeiro elemento está no índice 0."
+      }
+    ]
+  },
+  {
+    id: 8,
+    title: "Métodos de String",
+    description: "Manipule texto como um mestre",
+    concept: "Strings possuem métodos poderosos para transformar e analisar texto. upper(), lower(), replace() são seus aliados!",
+    questions: [
+      {
+        id: 21,
+        question: "Como transformar um texto em maiúsculas?",
+        code: "texto = 'python quest'\nresultado = texto.?",
+        options: [
+          "texto.uppercase()",
+          "texto.UPPER()",
+          "texto.upper()",
+          "texto.toUpperCase()"
+        ],
+        correctAnswer: 2,
+        explanation: "O método .upper() transforma todas as letras em maiúsculas. É simples e direto!",
+        hint1: "Em Python, métodos de string são em minúsculas.",
+        hint2: "Use .upper() sem parâmetros."
+      },
+      {
+        id: 22,
+        question: "Como substituir uma palavra em um texto?",
+        code: "frase = 'Eu amo Java'\nfrase = frase.?('Java', 'Python')",
+        options: [
+          "frase.change('Java', 'Python')",
+          "frase.substitute('Java', 'Python')",
+          "frase.replace('Java', 'Python')",
+          "frase.swap('Java', 'Python')"
+        ],
+        correctAnswer: 2,
+        explanation: "O método .replace(old, new) substitui todas as ocorrências da string antiga pela nova.",
+        hint1: "O método chama-se 'replace' (substituir em inglês).",
+        hint2: "Sintaxe: string.replace(antigo, novo)"
+      }
+    ]
+  },
+  {
+    id: 9,
+    title: "Dicionários (Chave: Valor)",
+    description: "Organize dados com chaves e valores",
+    concept: "Dicionários são como agendas: você usa uma chave (nome) para encontrar um valor (telefone). Perfeito para dados estruturados!",
+    questions: [
+      {
+        id: 23,
+        question: "Como criar um dicionário?",
+        options: [
+          "pessoa = ['nome': 'João', 'idade': 25]",
+          "pessoa = {'nome': 'João', 'idade': 25}",
+          "pessoa = ('nome': 'João', 'idade': 25)",
+          "pessoa = dict['nome': 'João', 'idade': 25]"
+        ],
+        correctAnswer: 1,
+        explanation: "Dicionários usam chaves {} e o formato chave:valor separados por vírgulas.",
+        hint1: "Dicionários usam chaves {}, não colchetes ou parênteses.",
+        hint2: "Formato: {chave: valor, chave2: valor2}"
+      },
+      {
+        id: 24,
+        question: "Como acessar um valor no dicionário?",
+        code: "aluno = {'nome': 'Maria', 'nota': 9.5}\nprint(aluno[?])",
+        options: [
+          "aluno['nota']",
+          "aluno[nota]",
+          "aluno.nota",
+          "aluno(nota)"
+        ],
+        correctAnswer: 0,
+        explanation: "Para acessar valores, use a chave entre colchetes e aspas: dicionario['chave']",
+        hint1: "Use colchetes com a chave entre aspas.",
+        hint2: "Sintaxe: dicionario['nome_da_chave']"
+      }
+    ]
+  },
+  {
+    id: 10,
+    title: "Tuplas (Imutabilidade)",
+    description: "Entenda coleções que não mudam",
+    concept: "Tuplas são como listas, mas imutáveis - uma vez criadas, não podem ser alteradas. Perfeitas para dados constantes!",
+    questions: [
+      {
+        id: 25,
+        question: "Como criar uma tupla?",
+        options: [
+          "coordenadas = [10, 20]",
+          "coordenadas = {10, 20}",
+          "coordenadas = (10, 20)",
+          "coordenadas = tuple[10, 20]"
+        ],
+        correctAnswer: 2,
+        explanation: "Tuplas usam parênteses (). Diferente de listas, tuplas não podem ser modificadas após criação.",
+        hint1: "Tuplas usam parênteses, não colchetes.",
+        hint2: "Sintaxe: variavel = (item1, item2)"
+      },
+      {
+        id: 26,
+        question: "O que acontece ao tentar modificar uma tupla?",
+        code: "ponto = (5, 10)\nponto[0] = 15",
+        options: [
+          "O valor é alterado normalmente",
+          "Um aviso é exibido",
+          "Gera um erro (TypeError)",
+          "A tupla se transforma em lista"
+        ],
+        correctAnswer: 2,
+        explanation: "Tuplas são imutáveis! Tentar modificá-las resulta em TypeError. Use listas se precisar modificar.",
+        hint1: "Tuplas não podem ser alteradas após criação.",
+        hint2: "Imutável significa que causa erro ao tentar modificar."
+      }
+    ]
+  },
+  {
+    id: 11,
+    title: "While Loops Avançados",
+    description: "Controle loops com break e continue",
+    concept: "break interrompe o loop completamente, continue pula para a próxima iteração. Ferramentas poderosas para controle de fluxo!",
+    questions: [
+      {
+        id: 27,
+        question: "O que o comando 'break' faz em um loop?",
+        code: "contador = 0\nwhile contador < 10:\n    if contador == 5:\n        break\n    contador += 1",
+        options: [
+          "Pula para a próxima iteração",
+          "Para o loop completamente",
+          "Reinicia o loop do início",
+          "Pausa o loop por 1 segundo"
+        ],
+        correctAnswer: 1,
+        explanation: "break interrompe o loop imediatamente, saindo dele. No exemplo, o loop para quando contador chega a 5.",
+        hint1: "break 'quebra' ou 'para' o loop.",
+        hint2: "O loop é encerrado imediatamente ao executar break."
+      },
+      {
+        id: 28,
+        question: "O que o comando 'continue' faz?",
+        code: "for i in range(5):\n    if i == 2:\n        continue\n    print(i)",
+        options: [
+          "Imprime: 0 1 2 3 4",
+          "Imprime: 0 1 3 4",
+          "Para o loop",
+          "Imprime apenas 2"
+        ],
+        correctAnswer: 1,
+        explanation: "continue pula a iteração atual e vai para a próxima. Quando i==2, o print é pulado.",
+        hint1: "continue faz o loop continuar, mas pula o resto do código atual.",
+        hint2: "O número 2 será pulado."
+      }
+    ]
+  },
+  {
+    id: 12,
+    title: "Importando Módulos",
+    description: "Use bibliotecas poderosas do Python",
+    concept: "Módulos são bibliotecas prontas com funções úteis. math, random, datetime - não reinvente a roda!",
+    questions: [
+      {
+        id: 29,
+        question: "Como importar o módulo math?",
+        options: [
+          "include math",
+          "using math",
+          "import math",
+          "require math"
+        ],
+        correctAnswer: 2,
+        explanation: "Em Python, usamos 'import nome_do_modulo' para importar bibliotecas.",
+        hint1: "A palavra-chave em Python é 'import'.",
+        hint2: "Sintaxe: import nome_do_modulo"
+      },
+      {
+        id: 30,
+        question: "Como usar uma função de um módulo importado?",
+        code: "import random\nnumero = ?",
+        options: [
+          "numero = randint(1, 10)",
+          "numero = random.randint(1, 10)",
+          "numero = random->randint(1, 10)",
+          "numero = randint.random(1, 10)"
+        ],
+        correctAnswer: 1,
+        explanation: "Usamos a sintaxe modulo.funcao() para acessar funções de um módulo importado.",
+        hint1: "Use ponto (.) para acessar funções do módulo.",
+        hint2: "Sintaxe: nome_modulo.nome_funcao()"
+      }
+    ]
   }
 ];
 
@@ -260,8 +484,22 @@ export const badges = [
   {
     id: 3,
     name: "Codificador",
-    description: "Complete todos os 6 níveis",
+    description: "Complete todos os 6 níveis básicos",
     icon: "🏆",
     requiredLevel: 6
+  },
+  {
+    id: 4,
+    name: "Explorador Intermediário",
+    description: "Desbloqueie o mundo intermediário (Nível 7+)",
+    icon: "🌟",
+    requiredLevel: 7
+  },
+  {
+    id: 5,
+    name: "Mestre Python",
+    description: "Complete todos os 12 níveis",
+    icon: "👑",
+    requiredLevel: 12
   }
 ];

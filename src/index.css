@@ -127,3 +127,18 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* Estilos de impressão para certificados */
+  @media print {
+    @page {
+      size: landscape;
+      margin: 0;
+    }
+    
+    body {
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+  }
+}

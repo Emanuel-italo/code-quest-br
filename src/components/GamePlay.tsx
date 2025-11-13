@@ -5,6 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { CheckCircle2, XCircle, Lightbulb, Code2 } from "lucide-react";
 import { Level, Question } from "@/data/gameData";
 import { Badge } from "@/components/ui/badge";
+import { CodeBlock } from "@/components/CodeBlock";
 
 interface GamePlayProps {
   level: Level;
@@ -115,8 +116,8 @@ export const GamePlay = ({ level, onLevelComplete, currentLevelNumber, totalLeve
             <p className="text-lg mb-4">{currentQuestion.question}</p>
             
             {currentQuestion.code && (
-              <div className="bg-muted p-4 rounded-lg font-mono text-sm mb-4 overflow-x-auto">
-                <pre>{currentQuestion.code}</pre>
+              <div className="mb-4">
+                <CodeBlock code={currentQuestion.code} />
               </div>
             )}
 
