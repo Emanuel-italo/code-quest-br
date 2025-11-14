@@ -25,7 +25,6 @@ export const CodeBlock = ({ code }: CodeBlockProps) => {
     // Substituir na ordem correta para evitar conflitos
     highlighted = highlighted.replace(comments, '<span class="text-muted-foreground italic">$1</span>');
     highlighted = highlighted.replace(strings, '<span class="text-success">$&</span>');
-    highlighted = highlighted.replace(numbers, '<span class="text-accent">$&</span>');
     highlighted = highlighted.replace(functions, '<span class="text-secondary">$1</span>');
     highlighted = highlighted.replace(keywords, '<span class="text-primary font-semibold">$&</span>');
     
