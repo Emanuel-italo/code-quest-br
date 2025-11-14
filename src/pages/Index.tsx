@@ -18,8 +18,9 @@ const Index = () => {
   const [levelScore, setLevelScore] = useState(0);
   const [earnedBadges, setEarnedBadges] = useState<typeof badges>([]);
 
-  const maxScorePerLevel = 20; // 2 questions * 10 points max
-  const totalMaxScore = maxScorePerLevel * gameLevels.length;
+  const maxScorePerLevelBasic = 60; // 6 questions * 10 points max for basic levels
+  const maxScorePerLevelIntermediate = 20; // 2 questions * 10 points max for intermediate levels
+  const totalMaxScore = (maxScorePerLevelBasic * 6) + (maxScorePerLevelIntermediate * 6);
 
   useEffect(() => {
     // Load progress from localStorage
@@ -82,8 +83,8 @@ const Index = () => {
     if (currentLevelIndex < gameLevels.length - 1) {
       // Após completar nível 6 (índice 5), verificar pontuação
       if (currentLevelIndex === 5) {
-        const basicMaxScore = maxScorePerLevel * 6; // 120 pontos máximos nos 6 níveis básicos
-        const requiredScore = 80; // Nota de corte
+        const basicMaxScore = maxScorePerLevelBasic * 6; // 360 pontos máximos nos 6 níveis básicos
+        const requiredScore = 240; // 240 pontos = ~67% (mínimo de 4 pontos por questão em média)
         
         if (totalScore >= requiredScore) {
           setGameState("gateSuccess");
@@ -154,7 +155,7 @@ const Index = () => {
         <LevelComplete
           levelNumber={currentLevelIndex + 1}
           score={levelScore}
-          maxScore={maxScorePerLevel}
+          maxScore={currentLevelIndex < 6 ? maxScorePerLevelBasic : maxScorePerLevelIntermediate}
           totalLevels={gameLevels.length}
           onNextLevel={handleNextLevel}
           newBadge={newBadge}
@@ -164,7 +165,7 @@ const Index = () => {
       {gameState === "gateSuccess" && (
         <GateSuccess
           totalScore={totalScore}
-          maxScore={maxScorePerLevel * 6}
+          maxScore={maxScorePerLevelBasic * 6}
           onContinue={handleContinueToIntermediate}
         />
       )}
@@ -172,7 +173,7 @@ const Index = () => {
       {gameState === "gateFailure" && (
         <GateFailure
           totalScore={totalScore}
-          maxScore={maxScorePerLevel * 6}
+          maxScore={maxScorePerLevelBasic * 6}
           onRetry={handleRetryBasics}
         />
       )}
