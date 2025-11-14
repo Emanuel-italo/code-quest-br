@@ -4,9 +4,11 @@ import { GamePlay } from "@/components/GamePlay";
 import { LevelComplete } from "@/components/LevelComplete";
 import { GameComplete } from "@/components/GameComplete";
 import { UnlockIntermediate } from "@/components/UnlockIntermediate";
+import { GateSuccess } from "@/components/GateSuccess";
+import { GateFailure } from "@/components/GateFailure";
 import { gameLevels, badges } from "@/data/gameData";
 
-type GameState = "intro" | "playing" | "levelComplete" | "unlockIntermediate" | "complete";
+type GameState = "intro" | "playing" | "levelComplete" | "gateSuccess" | "gateFailure" | "unlockIntermediate" | "complete";
 
 const Index = () => {
   const [loading, setLoading] = useState(true);
@@ -78,10 +80,16 @@ const Index = () => {
 
   const handleNextLevel = () => {
     if (currentLevelIndex < gameLevels.length - 1) {
-      // Após completar nível 6 (índice 5), mostrar desbloqueio
+      // Após completar nível 6 (índice 5), verificar pontuação
       if (currentLevelIndex === 5) {
-        setCurrentLevelIndex(currentLevelIndex + 1);
-        setGameState("unlockIntermediate");
+        const basicMaxScore = maxScorePerLevel * 6; // 120 pontos máximos nos 6 níveis básicos
+        const requiredScore = 80; // Nota de corte
+        
+        if (totalScore >= requiredScore) {
+          setGameState("gateSuccess");
+        } else {
+          setGameState("gateFailure");
+        }
       } else {
         setCurrentLevelIndex(currentLevelIndex + 1);
         setGameState("playing");
@@ -91,8 +99,22 @@ const Index = () => {
     }
   };
 
+  const handleContinueToIntermediate = () => {
+    setCurrentLevelIndex(currentLevelIndex + 1);
+    setGameState("unlockIntermediate");
+  };
+
   const handleContinueAfterUnlock = () => {
     setGameState("playing");
+  };
+
+  const handleRetryBasics = () => {
+    setGameState("intro");
+    setCurrentLevelIndex(0);
+    setTotalScore(0);
+    setLevelScore(0);
+    setEarnedBadges([]);
+    localStorage.removeItem("pythonquest_progress");
   };
 
   const handleRestart = () => {
@@ -136,6 +158,22 @@ const Index = () => {
           totalLevels={gameLevels.length}
           onNextLevel={handleNextLevel}
           newBadge={newBadge}
+        />
+      )}
+
+      {gameState === "gateSuccess" && (
+        <GateSuccess
+          totalScore={totalScore}
+          maxScore={maxScorePerLevel * 6}
+          onContinue={handleContinueToIntermediate}
+        />
+      )}
+
+      {gameState === "gateFailure" && (
+        <GateFailure
+          totalScore={totalScore}
+          maxScore={maxScorePerLevel * 6}
+          onRetry={handleRetryBasics}
         />
       )}
 
