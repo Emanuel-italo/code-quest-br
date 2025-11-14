@@ -51,6 +51,63 @@ export const gameLevels: Level[] = [
         explanation: "Textos entre aspas são do tipo 'str' (string). Strings são usadas para armazenar texto.",
         hint1: "Valores entre aspas são sempre texto.",
         hint2: "str significa 'string', que é texto em programação."
+      },
+      {
+        id: 13,
+        question: "Qual é o tipo de dado do valor: 3.14?",
+        options: [
+          "int (número inteiro)",
+          "float (número decimal)",
+          "str (texto/string)",
+          "bool (verdadeiro/falso)"
+        ],
+        correctAnswer: 1,
+        explanation: "Números com ponto decimal são do tipo 'float' (ponto flutuante). Usado para valores decimais.",
+        hint1: "Números com vírgula/ponto decimal são float.",
+        hint2: "3.14 é um número decimal, então é float."
+      },
+      {
+        id: 14,
+        question: "Como criar uma variável de texto (string)?",
+        options: [
+          "nome = João",
+          "nome = 'João'",
+          "nome = (João)",
+          "nome = [João]"
+        ],
+        correctAnswer: 1,
+        explanation: "Strings devem estar entre aspas simples '' ou duplas \"\". Sem aspas, Python procura por uma variável.",
+        hint1: "Texto sempre precisa estar entre aspas.",
+        hint2: "Use aspas simples ou duplas para criar strings."
+      },
+      {
+        id: 15,
+        question: "Qual é o valor da variável depois desta operação?",
+        code: "x = 10\nx = 20",
+        options: [
+          "10",
+          "20",
+          "30",
+          "Erro"
+        ],
+        correctAnswer: 1,
+        explanation: "A segunda atribuição substitui o valor anterior. x agora vale 20.",
+        hint1: "A última atribuição é a que vale.",
+        hint2: "x = 20 substitui o valor anterior de x."
+      },
+      {
+        id: 16,
+        question: "Qual é o tipo de dado de: True?",
+        options: [
+          "int",
+          "str",
+          "bool",
+          "float"
+        ],
+        correctAnswer: 2,
+        explanation: "True e False são valores booleanos (bool). Representam verdadeiro ou falso.",
+        hint1: "True/False são valores lógicos.",
+        hint2: "bool é o tipo para verdadeiro/falso."
       }
     ]
   },
@@ -88,6 +145,64 @@ export const gameLevels: Level[] = [
         explanation: "O operador == compara valores. O = simples é usado para atribuir valores a variáveis.",
         hint1: "Para atribuir usamos um =, para comparar usamos dois.",
         hint2: "== (dois iguais) compara, = (um igual) atribui."
+      },
+      {
+        id: 17,
+        question: "Qual o resultado de: 20 / 4",
+        options: [
+          "5.0",
+          "5",
+          "4",
+          "Erro"
+        ],
+        correctAnswer: 0,
+        explanation: "A divisão (/) em Python sempre retorna um float (número decimal), mesmo que o resultado seja exato.",
+        hint1: "Divisão sempre retorna decimal em Python.",
+        hint2: "20 / 4 = 5.0 (não 5)"
+      },
+      {
+        id: 18,
+        question: "Qual operador verifica se dois valores são DIFERENTES?",
+        options: [
+          "==",
+          "!=",
+          "<>",
+          "=/="
+        ],
+        correctAnswer: 1,
+        explanation: "O operador != significa 'não igual' ou 'diferente'. Retorna True se os valores forem diferentes.",
+        hint1: "! significa 'não' em programação.",
+        hint2: "!= é 'não igual' (diferente)."
+      },
+      {
+        id: 31,
+        question: "Qual o resultado de: 10 % 3",
+        code: "resto = 10 % 3\nprint(resto)",
+        options: [
+          "3",
+          "1",
+          "10",
+          "0"
+        ],
+        correctAnswer: 1,
+        explanation: "O operador % (módulo) retorna o resto da divisão. 10 dividido por 3 dá 3 com resto 1.",
+        hint1: "% retorna o resto da divisão.",
+        hint2: "10 ÷ 3 = 3 resto 1"
+      },
+      {
+        id: 32,
+        question: "Qual operador eleva um número à potência?",
+        code: "resultado = 2 ___ 3\nprint(resultado)  # Deve imprimir 8",
+        options: [
+          "^",
+          "**",
+          "pow",
+          "^^"
+        ],
+        correctAnswer: 1,
+        explanation: "O operador ** eleva um número à potência. 2 ** 3 = 2 × 2 × 2 = 8.",
+        hint1: "Não é ^ como em outras linguagens.",
+        hint2: "Use ** para potenciação."
       }
     ]
   },
@@ -125,6 +240,66 @@ export const gameLevels: Level[] = [
         explanation: "A função input() recebe texto do usuário. O texto entre parênteses é a pergunta exibida.",
         hint1: "Use input() para receber dados do usuário.",
         hint2: "input('mensagem') mostra a mensagem e espera o usuário digitar."
+      },
+      {
+        id: 33,
+        question: "Como exibir múltiplos valores em uma linha?",
+        code: "nome = 'Ana'\nidade = 25\nprint('Nome:', nome, 'Idade:', idade)",
+        options: [
+          "print('Nome:', nome, 'Idade:', idade)",
+          "print('Nome:' + nome + 'Idade:' + idade)",
+          "print('Nome: {nome} Idade: {idade}')",
+          "print.multiple(nome, idade)"
+        ],
+        correctAnswer: 0,
+        explanation: "Use vírgulas para separar múltiplos valores no print(). Python adiciona espaços automaticamente.",
+        hint1: "Separe os valores com vírgulas dentro do print().",
+        hint2: "print(valor1, valor2, valor3)"
+      },
+      {
+        id: 34,
+        question: "Qual o tipo de dado retornado pela função input()?",
+        code: "idade = input('Digite sua idade: ')",
+        options: [
+          "int",
+          "str",
+          "float",
+          "bool"
+        ],
+        correctAnswer: 1,
+        explanation: "input() SEMPRE retorna string (str). Se precisar de número, use int() ou float() para converter.",
+        hint1: "input() sempre retorna texto.",
+        hint2: "Mesmo digitando números, input() retorna string."
+      },
+      {
+        id: 35,
+        question: "Como converter texto em número inteiro?",
+        code: "idade_texto = '25'\nidade_numero = ___(idade_texto)",
+        options: [
+          "str(idade_texto)",
+          "int(idade_texto)",
+          "float(idade_texto)",
+          "number(idade_texto)"
+        ],
+        correctAnswer: 1,
+        explanation: "Use int() para converter string em número inteiro. Exemplo: int('25') resulta em 25.",
+        hint1: "int() converte para inteiro.",
+        hint2: "int('texto_numero') → número"
+      },
+      {
+        id: 36,
+        question: "O que acontece neste código?",
+        code: "print('Linha 1')\nprint('Linha 2')\nprint('Linha 3')",
+        options: [
+          "Imprime tudo na mesma linha",
+          "Imprime cada texto em uma linha diferente",
+          "Dá erro",
+          "Imprime apenas a última linha"
+        ],
+        correctAnswer: 1,
+        explanation: "Cada print() cria uma nova linha automaticamente. Para imprimir na mesma linha, use end=''.",
+        hint1: "print() adiciona quebra de linha automaticamente.",
+        hint2: "Cada print() é uma nova linha."
       }
     ]
   },
@@ -163,6 +338,66 @@ export const gameLevels: Level[] = [
         explanation: "elif (else if) permite adicionar múltiplas condições. É verificado apenas se o if anterior for falso.",
         hint1: "elif é a abreviação de 'else if'.",
         hint2: "Use elif entre if e else para condições adicionais."
+      },
+      {
+        id: 37,
+        question: "O que será impresso?",
+        code: "x = 10\nif x > 5:\n    print('Maior')\nelse:\n    print('Menor')",
+        options: [
+          "Maior",
+          "Menor",
+          "Maior Menor",
+          "Nada"
+        ],
+        correctAnswer: 0,
+        explanation: "Como 10 > 5 é verdadeiro, o bloco do if é executado e 'Maior' é impresso. O else é ignorado.",
+        hint1: "10 é maior que 5?",
+        hint2: "Quando if é True, else não executa."
+      },
+      {
+        id: 38,
+        question: "Qual operador lógico significa 'E' (ambas condições devem ser verdadeiras)?",
+        code: "idade = 25\nif idade >= 18 ___ idade < 65:\n    print('Adulto')",
+        options: [
+          "or",
+          "and",
+          "not",
+          "&&"
+        ],
+        correctAnswer: 1,
+        explanation: "O operador 'and' exige que AMBAS as condições sejam verdadeiras. Se qualquer uma for falsa, o resultado é falso.",
+        hint1: "'and' significa 'E' - ambas devem ser True.",
+        hint2: "True and True = True"
+      },
+      {
+        id: 39,
+        question: "Qual operador lógico significa 'OU' (pelo menos uma condição deve ser verdadeira)?",
+        code: "dia = 'sabado'\nif dia == 'sabado' ___ dia == 'domingo':\n    print('Fim de semana!')",
+        options: [
+          "and",
+          "or",
+          "not",
+          "||"
+        ],
+        correctAnswer: 1,
+        explanation: "O operador 'or' retorna True se PELO MENOS uma condição for verdadeira.",
+        hint1: "'or' significa 'OU' - uma ou outra (ou ambas).",
+        hint2: "True or False = True"
+      },
+      {
+        id: 40,
+        question: "O que acontece se nenhuma condição for verdadeira?",
+        code: "nota = 50\nif nota >= 90:\n    print('A')\nelif nota >= 70:\n    print('B')",
+        options: [
+          "Imprime 'A'",
+          "Imprime 'B'",
+          "Não imprime nada",
+          "Dá erro"
+        ],
+        correctAnswer: 2,
+        explanation: "Se nenhuma condição for verdadeira e não houver 'else', nada é executado. O código continua normalmente.",
+        hint1: "50 não é >= 90 nem >= 70.",
+        hint2: "Sem else, nada acontece se todas forem falsas."
       }
     ]
   },
@@ -200,6 +435,65 @@ export const gameLevels: Level[] = [
         explanation: "while continua repetindo enquanto a condição for verdadeira. Útil quando não sabemos quantas vezes repetir.",
         hint1: "while = enquanto (repete enquanto condição for verdadeira).",
         hint2: "while condição: repete até condição ser falsa."
+      },
+      {
+        id: 41,
+        question: "O que range(5) gera?",
+        options: [
+          "1, 2, 3, 4, 5",
+          "0, 1, 2, 3, 4",
+          "5",
+          "0, 1, 2, 3, 4, 5"
+        ],
+        correctAnswer: 1,
+        explanation: "range(5) começa do 0 e vai até 4 (5 não incluído). Gera: 0, 1, 2, 3, 4.",
+        hint1: "range(n) começa do zero.",
+        hint2: "range(5) = 0, 1, 2, 3, 4 (5 números)"
+      },
+      {
+        id: 42,
+        question: "Como repetir algo 3 vezes?",
+        code: "for i in ___:\n    print('Python!')",
+        options: [
+          "range(3)",
+          "range(1, 3)",
+          "range(0, 2)",
+          "3"
+        ],
+        correctAnswer: 0,
+        explanation: "range(3) gera 0, 1, 2 - são 3 números, então o loop executa 3 vezes.",
+        hint1: "range(n) gera n números começando do zero.",
+        hint2: "range(3) = 0, 1, 2 (3 repetições)"
+      },
+      {
+        id: 43,
+        question: "O que será impresso?",
+        code: "contador = 0\nwhile contador < 3:\n    print(contador)\n    contador += 1",
+        options: [
+          "0 1 2",
+          "1 2 3",
+          "0 1 2 3",
+          "Loop infinito"
+        ],
+        correctAnswer: 0,
+        explanation: "Imprime 0, depois 1, depois 2. Quando contador vira 3, a condição (contador < 3) é falsa e o loop para.",
+        hint1: "contador começa em 0 e aumenta de 1 em 1.",
+        hint2: "Para quando contador = 3 (não < 3)."
+      },
+      {
+        id: 44,
+        question: "Como iterar sobre cada letra de uma palavra?",
+        code: "for letra in ___:\n    print(letra)",
+        options: [
+          "for letra in 'Python':",
+          "for letra in ['Python']:",
+          "for letra in (Python):",
+          "for letra in Python:"
+        ],
+        correctAnswer: 0,
+        explanation: "Pode iterar diretamente sobre strings. Cada caractere é acessado um por vez.",
+        hint1: "Strings são iteráveis em Python.",
+        hint2: "for letra in 'texto':"
       }
     ]
   },
@@ -237,6 +531,66 @@ export const gameLevels: Level[] = [
         explanation: "'return' devolve um valor da função. Isso permite usar o resultado em outras partes do código.",
         hint1: "Use return para devolver valores de uma função.",
         hint2: "return calcula e devolve o resultado para quem chamou a função."
+      },
+      {
+        id: 45,
+        question: "Como chamar uma função?",
+        code: "def saudar():\n    print('Olá!')\n\n___",
+        options: [
+          "saudar()",
+          "call saudar()",
+          "run saudar()",
+          "execute saudar()"
+        ],
+        correctAnswer: 0,
+        explanation: "Para executar uma função, escreva seu nome seguido de parênteses: nome_funcao().",
+        hint1: "Use o nome da função com parênteses.",
+        hint2: "nome_funcao()"
+      },
+      {
+        id: 46,
+        question: "Como criar uma função que recebe um parâmetro?",
+        code: "def saudar_pessoa(___):\n    print('Olá,', nome)",
+        options: [
+          "nome",
+          "(nome)",
+          "[nome]",
+          "{nome}"
+        ],
+        correctAnswer: 0,
+        explanation: "Parâmetros são colocados entre os parênteses na definição da função, separados por vírgulas se houver mais de um.",
+        hint1: "Parâmetros vão entre os parênteses da função.",
+        hint2: "def funcao(parametro):"
+      },
+      {
+        id: 47,
+        question: "Qual a diferença entre print e return em uma função?",
+        code: "def funcao1():\n    print(10)\n\ndef funcao2():\n    return 10",
+        options: [
+          "São iguais",
+          "print mostra na tela, return devolve o valor",
+          "return mostra na tela, print devolve o valor",
+          "Nenhuma das anteriores"
+        ],
+        correctAnswer: 1,
+        explanation: "print() mostra algo na tela, mas não devolve nada. return devolve um valor que pode ser usado em outras partes do código.",
+        hint1: "print é para exibir, return é para devolver.",
+        hint2: "Só return permite usar o resultado depois."
+      },
+      {
+        id: 48,
+        question: "O que acontece se uma função não tem return?",
+        code: "def somar(a, b):\n    resultado = a + b\n\nx = somar(5, 3)\nprint(x)",
+        options: [
+          "Imprime 8",
+          "Imprime None",
+          "Dá erro",
+          "Imprime 0"
+        ],
+        correctAnswer: 1,
+        explanation: "Funções sem return retornam None (valor especial que significa 'nada'). O cálculo foi feito mas não foi devolvido.",
+        hint1: "Sem return, a função retorna None.",
+        hint2: "None é o valor padrão de retorno."
       }
     ]
   },
